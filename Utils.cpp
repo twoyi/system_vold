@@ -530,12 +530,16 @@ uint64_t GetTreeBytes(const std::string& path) {
 }
 
 bool IsFilesystemSupported(const std::string& fsType) {
+#if 0
     std::string supported;
     if (!ReadFileToString(kProcFilesystems, &supported)) {
         PLOG(ERROR) << "Failed to read supported filesystems";
         return false;
     }
     return supported.find(fsType + "\n") != std::string::npos;
+#else
+    return true;
+#endif
 }
 
 status_t WipeBlockDevice(const std::string& path) {

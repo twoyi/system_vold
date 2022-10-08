@@ -150,7 +150,7 @@ status_t PublicVolume::doMount() {
         PLOG(ERROR) << getId() << " failed to create FUSE mount points";
         return -errno;
     }
-
+#if 0
     dev_t before = GetDevice(mFuseWrite);
 
     if (!(mFusePid = fork())) {
@@ -192,6 +192,7 @@ status_t PublicVolume::doMount() {
     }
     /* sdcardfs will have exited already. FUSE will still be running */
     TEMP_FAILURE_RETRY(waitpid(mFusePid, nullptr, WNOHANG));
+#endif
 
     return OK;
 }

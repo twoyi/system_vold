@@ -624,8 +624,9 @@ int CommandListener::FstrimCmd::runCommand(SocketClient *cli,
         flags = android::vold::TrimTask::Flags::kDeepTrim
                 | android::vold::TrimTask::Flags::kBenchmarkAfter;
     }
-
+#if 0
     (new android::vold::TrimTask(flags))->start();
+#endif
     return sendGenericOkFail(cli, 0);
 }
 

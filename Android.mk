@@ -81,7 +81,7 @@ common_local_tidy_flags := -warnings-as-errors=clang-analyzer-security*,cert-*
 common_local_tidy_checks := -*,clang-analyzer-security*,cert-*,-cert-err34-c,-cert-err58-cpp
 
 vold_conlyflags := -std=c11
-vold_cflags := -Werror -Wall -Wno-missing-field-initializers -Wno-unused-variable -Wno-unused-parameter
+vold_cflags := -Werror -Wall -Wno-missing-field-initializers -Wno-unused-variable -Wno-unused-parameter -Wno-unused-function
 
 required_modules :=
 ifeq ($(TARGET_USERIMAGES_USE_EXT4), true)

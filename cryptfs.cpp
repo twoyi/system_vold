@@ -2654,6 +2654,7 @@ static int persist_count_keys(const char *fieldname)
 /* Return the value of the specified field. */
 int cryptfs_getfield(const char *fieldname, char *value, int len)
 {
+    SLOGD("cryptfs_getfield: %s", fieldname);
     if (e4crypt_is_native()) {
         SLOGE("Cannot get field when file encrypted");
         return -1;
@@ -2670,7 +2671,9 @@ int cryptfs_getfield(const char *fieldname, char *value, int len)
     char temp_field[PROPERTY_KEY_MAX];
 
     if (persist_data == NULL) {
+    SLOGD("cryptfs_getfield: load_persistent_data");
         load_persistent_data();
+    SLOGD("cryptfs_getfield: load_persistent_data done!");
         if (persist_data == NULL) {
             SLOGE("Getfield error, cannot load persistent data");
             goto out;
@@ -2890,8 +2893,12 @@ void cryptfs_clear_password()
 
 int cryptfs_isConvertibleToFBE()
 {
+#if 0
     struct fstab_rec* rec = fs_mgr_get_entry_for_mount_point(fstab, DATA_MNT_POINT);
     return fs_mgr_is_convertible_to_fbe(rec) ? 1 : 0;
+#else
+    return 0;
+#endif
 }
 
 int cryptfs_create_default_ftr(struct crypt_mnt_ftr* crypt_ftr, __attribute__((unused))int key_length)

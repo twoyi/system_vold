@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
     NetlinkManager *nm;
 
     parse_args(argc, argv);
-
+#if 0
     sehandle = selinux_android_file_context_handle();
     if (sehandle) {
         selinux_android_set_sehandle(sehandle);
@@ -77,6 +77,7 @@ int main(int argc, char** argv) {
     fcntl(android_get_control_socket("cryptd"), F_SETFD, FD_CLOEXEC);
 
     mkdir("/dev/block/vold", 0755);
+#endif
 
     /* For when cryptfs checks and mounts an encrypted filesystem */
     klog_set_level(6);
@@ -139,7 +140,9 @@ int main(int argc, char** argv) {
     // Do coldboot here so it won't block booting,
     // also the cold boot is needed in case we have flash drive
     // connected before Vold launched
+#if 0
     coldboot("/sys/block");
+#endif
     // Eventually we'll become the monitoring thread
     while(1) {
         pause();

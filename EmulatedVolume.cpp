@@ -76,6 +76,7 @@ status_t EmulatedVolume::doMount() {
         return -errno;
     }
 
+#if 0
     dev_t before = GetDevice(mFuseWrite);
 
     if (!(mFusePid = fork())) {
@@ -106,7 +107,7 @@ status_t EmulatedVolume::doMount() {
     }
     /* sdcardfs will have exited already. FUSE will still be running */
     TEMP_FAILURE_RETRY(waitpid(mFusePid, nullptr, WNOHANG));
-
+#endif
     return OK;
 }
 

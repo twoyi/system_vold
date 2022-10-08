@@ -315,7 +315,9 @@ int VolumeManager::setDebug(bool enable) {
 int VolumeManager::start() {
     // Always start from a clean slate by unmounting everything in
     // directories that we own, in case we crashed.
+#if 0
     unmountAll();
+#endif
 
     // Assume that we always have an emulated volume on internal
     // storage; the framework will decide if it should be mounted.
@@ -572,7 +574,7 @@ static int unmount_tree(const char* path) {
 
 int VolumeManager::remountUid(uid_t uid, const std::string& mode) {
     LOG(DEBUG) << "Remounting " << uid << " as mode " << mode;
-
+#if 0
     DIR* dir;
     struct dirent* de;
     char rootName[PATH_MAX];
@@ -686,6 +688,7 @@ next:
         close(pidFd);
     }
     closedir(dir);
+#endif
     return 0;
 }
 

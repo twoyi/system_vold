@@ -49,6 +49,7 @@ NetlinkManager::~NetlinkManager() {
 }
 
 int NetlinkManager::start() {
+#if 0
     struct sockaddr_nl nladdr;
     int sz = 64 * 1024;
     int on = 1;
@@ -93,11 +94,14 @@ int NetlinkManager::start() {
 out:
     close(mSock);
     return -1;
+#else
+    return 0;
+#endif
 }
 
 int NetlinkManager::stop() {
     int status = 0;
-
+#if 0
     if (mHandler->stop()) {
         SLOGE("Unable to stop NetlinkHandler: %s", strerror(errno));
         status = -1;
@@ -106,7 +110,8 @@ int NetlinkManager::stop() {
     mHandler = NULL;
 
     close(mSock);
+#endif
+    (void) mHandler;
     mSock = -1;
-
     return status;
 }
